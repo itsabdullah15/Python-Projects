@@ -41,7 +41,7 @@ class Bank:
         def add_cash(self, amount):
             if amount > 0:
                 self.cash += str(amount)
-                with open(f"{name}","r") as f:
+                with open(f"{name}.txt","r") as f:
                     details = f.read()
                     self.client_details_list = details.split("\n")
 
@@ -69,13 +69,14 @@ class Bank:
 
                 with open(f"{self.name}.txt","r") as f:
                     details_2 = f.read()
-                self.client_details_list = details_2.split("\n")    
+                    self.client_details_list = details_2.split("\n")    
 
                 with open(f"{self.name}.txt","w") as f:
                     f.write(details.replace(str(self.client_details_list[3]),str(left_cash)))
 
                 print("Amount Transfered Successfully to", name, "-",ph)
                 print("Balance left = ",left_cash)
+                self.cash = left_cash
 
         def password_change(self,password):
             if len(password) < 5 or len(password) > 18:
@@ -87,7 +88,7 @@ class Bank:
 
                 with open(f"{self.name}.txt","w") as f:
                     f.write(details.replace(str(self.client_details_list[2]),str(password)))
-                    print("new Password set up successfully")
+                print("New Password set up successfully")
 
         def ph_change(self , ph):
             if len(str(ph)) > 10 or len(str(ph)) < 10:
@@ -99,7 +100,7 @@ class Bank:
 
                 with open(f"{self.name}.txt","w") as f:
                     f.write(details.replace(str(self.client_details_list[1]),str(ph)))
-                print("new Phone number set up successfully")
+                print("New Phone number set up successfully")
             
 
 if __name__ == "__main__":
@@ -132,10 +133,10 @@ if __name__ == "__main__":
                     choose = int(input())
                     if choose == 1:
                         continue
-                    if choose == 2:
+                    elif choose == 2:
                         break
 
-                if login_user == 2:
+                elif login_user == 2:
                     print("Balance =",Bank_object.cash)
                     print("\n1.Back Menu ")
                     print("2.Logout")
